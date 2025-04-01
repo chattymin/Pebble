@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TextGrapheme"
 include(":app")
+include(":pebble")
