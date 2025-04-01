@@ -44,3 +44,31 @@ private fun String.isLikelyAscii(): Boolean {
     }
     return true
 }
+
+// 그래핌 단위의 문자열 뒤집기(이모지 포함)
+fun String.reverseWithGraphemes(): String {
+    if (this.isEmpty()) return ""
+    if (this.length == 1) return this
+    if (this.isLikelyAscii()) return this.reversed()
+
+    val iterator = localBreakIterator.get()
+    iterator.setText(this)
+
+    val graphemes = mutableListOf<String>()
+
+    var start = 0
+    var end = iterator.next()
+
+    while (end != BreakIterator.DONE) {
+        graphemes.add(this.substring(start, end))
+        start = end
+        end = iterator.next()
+    }
+
+    val result = StringBuilder(length)
+    for (i in graphemes.size - 1 downTo 0) {
+        result.append(graphemes[i])
+    }
+
+    return result.toString()
+}
