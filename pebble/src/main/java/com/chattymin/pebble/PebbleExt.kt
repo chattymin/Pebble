@@ -30,12 +30,9 @@ fun String.graphemeLength(): Int {
     iterator.setText(this)
 
     var count = 0
-    var boundary = iterator.first()
-    while (boundary != BreakIterator.DONE) {
+    while (iterator.next() != BreakIterator.DONE) {
         count++
-        boundary = iterator.next()
     }
-
     return count
 }
 
