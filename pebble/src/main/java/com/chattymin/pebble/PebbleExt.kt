@@ -3,26 +3,31 @@ package com.chattymin.pebble
 import java.text.BreakIterator
 import java.util.Locale
 
-private val localBreakIterator = ThreadLocal<BreakIterator>().apply {
+private val LocalBreakIterator = ThreadLocal<BreakIterator>().apply {
     set(BreakIterator.getCharacterInstance(Locale.ROOT))
 }
 
-// 그래핌 단위로 카운팅된 총 글자수 리턴
-fun String.countGraphemes(trim: Boolean = false): Int {
-    val target = if (trim) this.trim() else this
-    if (target.isEmpty()) return 0
-    if (target.length == 1) return 1
-    if (target.isLikelyAscii()) return target.length
+private val localBreakIterator: BreakIterator = LocalBreakIterator.get() ?: initBreakIterator()
 
-    // ThreadLocal.get()은 값이 설정되지 않았을 경우 null을 반환할 수 있어서 nullable 타입으로 추론하는듯.
-    // 그래서 iterator가 null safety하지 않다고 경고하는디...
-    //    val iterator = localBreakIterator.get() ?:
-    //    BreakIterator.getCharacterInstance(Locale.ROOT).also {
-    //        localBreakIterator.set(it)
-    //    }
-    // 이렇게 null 처리를 하는건 어떨지???
-    val iterator = localBreakIterator.get()
-    iterator.setText(target)
+private fun initBreakIterator() = BreakIterator.getCharacterInstance(Locale.ROOT).also {
+    LocalBreakIterator.set(it)
+}
+
+private const val ASCII_MAX = 0x7F
+
+/**
+ * Returns the number of graphemes (user-perceived characters) in the string.
+ * Unlike the simple `length` property, which counts code units, this function
+ * correctly handles grapheme clusters, including emojis and combined characters.
+ * It uses `BreakIterator` to determine boundaries, ensuring accuracy for complex scripts.
+ */
+fun String.graphemeLength(): Int {
+    if (this.isEmpty()) return 0
+    if (this.length == 1) return 1
+    if (this.isAscii()) return this.length
+
+    val iterator = localBreakIterator
+    iterator.setText(this)
 
     var count = 0
     var boundary = iterator.first()
@@ -34,13 +39,15 @@ fun String.countGraphemes(trim: Boolean = false): Int {
     return count
 }
 
-// 아스키 문자열일 경우 얼리리턴 용도
-private fun String.isLikelyAscii(): Boolean {
-    var i = 0
-    val len = length
-    while (i < len) {
-        if (this[i].code > 0x7F) return false
-        i++
+/**
+ * Checks if the string consists only of ASCII characters (0x00 - 0x7F).
+ * This function is useful for performance optimizations, as ASCII-only
+ * strings do not require complex Unicode processing.
+ * If any character falls outside the ASCII range, it immediately returns `false`.
+ */
+private fun String.isAscii(): Boolean {
+    for (input in this) {
+        if (input.code > ASCII_MAX) return false
     }
     return true
 }
