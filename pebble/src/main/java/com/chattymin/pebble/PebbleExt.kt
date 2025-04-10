@@ -64,21 +64,21 @@ private fun CharSequence.isAscii(): Boolean {
 }
 
 /**
- * Returns `true` if this Char is Emoji.
+ * Returns `true` if this Char is an Emoji.
  */
 fun Char.isEmoji(): Boolean {
     return isEmoji(this.code)
 }
 
 /**
- * Returns `true` if this String is Emoji.
+ * Returns `true` if this String is a single Emoji character.
  */
 fun String.isEmoji(): Boolean {
     return this.graphemeLength == 1 && isEmoji(this.codePointAt(0))
 }
 
 /**
- * Returns `true` if this CharSequence is Emoji.
+ * Returns `true` if this CharSequence is a single Emoji character.
  */
 fun CharSequence.isEmoji(): Boolean {
     return this.graphemeLength == 1 && isEmoji(this.toString().codePointAt(0))
