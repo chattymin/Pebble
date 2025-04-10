@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.chattymin.pebble.containsEmoji
 import com.chattymin.pebble.graphemeLength
 import com.chattymin.pebble.isEmoji
 import com.chattymin.textgrapheme.ui.theme.TextGraphemeTheme
@@ -59,7 +60,11 @@ class MainActivity : ComponentActivity() {
                         )
 
                         Text(
-                            text = "isEmoji?: ${text.isEmoji()}",
+                            text = "isEmoji: ${text.isEmoji()}",
+                        )
+
+                        Text(
+                            text = "containsEmoji: ${text.containsEmoji()}",
                         )
                     }
                 }
