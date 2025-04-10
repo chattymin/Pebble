@@ -1,7 +1,6 @@
 package com.chattymin.pebble
 
 import java.text.BreakIterator
-import java.util.Locale
 
 /**
  * Returns the number of graphemes (user-perceived characters) in the string.
@@ -55,7 +54,7 @@ fun String.containsEmoji(): Boolean {
 fun String.extractEmojis(): List<String> {
     if (this.isBlank()) return emptyList()
 
-    val iterator = BreakIterator.getCharacterInstance(Locale.ROOT)
+    val iterator = localBreakIterator
     iterator.setText(this)
 
     val emojis = mutableListOf<String>()
