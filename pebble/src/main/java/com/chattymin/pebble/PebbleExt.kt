@@ -84,6 +84,15 @@ fun CharSequence.isEmoji(): Boolean {
     return this.graphemeLength == 1 && isEmoji(this.toString().codePointAt(0))
 }
 
+private fun Any?.containsEmoji(): Boolean {
+    return when (this) {
+        is Char -> this.isEmoji()
+        is String -> this.containsEmoji()
+        is CharSequence -> this.containsEmoji()
+        else -> false
+    }
+}
+
 private fun isEmoji(codePoint: Int): Boolean {
     return (codePoint in 0x1F600..0x1F64F) ||  // Emoticons (smileys, emotions)
             (codePoint in 0x1F300..0x1F5FF) ||  // Symbols & pictographs (weather, places, objects)
@@ -95,4 +104,92 @@ private fun isEmoji(codePoint: Int): Boolean {
             (codePoint in 0x2700..0x27BF) ||  // Dingbats
             (codePoint in 0xFE00..0xFE0F) ||  // Variation selectors
             (codePoint == 0x200D) // Zero Width Joiner (ZWJ)
+}
+
+/**
+ * Returns `true` if this String contains any Emoji characters.
+ */
+fun String.containsEmoji(): Boolean {
+    for (input in this) {
+        if (input.isEmoji()) return true
+    }
+    return false
+}
+
+/**
+ * Returns `true` if this CharSequence contains any Emoji characters.
+ */
+fun CharSequence.containsEmoji(): Boolean {
+    for (input in this) {
+        if (input.isEmoji()) return true
+    }
+    return false
+}
+
+/**
+ * Returns `true` if this Array contains any Emoji characters.
+ */
+fun <T> Array <out T>.containsEmoji(): Boolean {
+    for (input in this) {
+        if (input.containsEmoji()) return true
+    }
+    return false
+}
+
+/**
+ * Returns `true` if this CharArray contains any Emoji characters.
+ */
+fun CharArray.containsEmoji(): Boolean {
+    for (input in this) {
+        if (input.isEmoji()) return true
+    }
+    return false
+}
+
+/**
+ * Returns `true` if this Iterable contains any Emoji characters.
+ */
+fun <T> Iterable<T>.containsEmoji(): Boolean {
+    for (input in this) {
+        if (input.containsEmoji()) return true
+    }
+    return false
+}
+
+/**
+ * Returns `true` if this Map contains any Emoji characters.
+ */
+fun <K, V> Map<out K, V>.containsEmoji(): Boolean {
+    for (entry in this) {
+        val key = entry.key
+        val value = entry.value
+
+        if (key.containsEmoji()) return true
+        if (value.containsEmoji()) return true
+    }
+    return false
+}
+
+/**
+ * Returns `true` if this Map contains any Emoji characters in the keys.
+ */
+fun <K, V> Map<out K, V>.containsEmojiKey(): Boolean {
+    for (entry in this) {
+        val key = entry.key
+
+        if (key.containsEmoji()) return true
+    }
+    return false
+}
+
+/**
+ * Returns `true` if this Map contains any Emoji characters in the values.
+ */
+fun <K, V> Map<out K, V>.containsEmojiValue(): Boolean {
+    for (entry in this) {
+        val value = entry.value
+
+        if (value.containsEmoji()) return true
+    }
+    return false
 }
