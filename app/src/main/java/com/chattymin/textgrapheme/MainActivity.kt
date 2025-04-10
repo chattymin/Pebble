@@ -21,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.chattymin.pebble.graphemeLength
+import com.chattymin.pebble.isEmoji
 import com.chattymin.textgrapheme.ui.theme.TextGraphemeTheme
 
 class MainActivity : ComponentActivity() {
@@ -55,6 +56,10 @@ class MainActivity : ComponentActivity() {
 
                         Text(
                             text = "Length: ${text.graphemeLength}"
+                        )
+
+                        Text(
+                            text = "isEmoji?: ${text.isEmoji()}",
                         )
                     }
                 }
