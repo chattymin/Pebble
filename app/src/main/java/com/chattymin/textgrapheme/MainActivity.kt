@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.chattymin.pebble.containsEmoji
 import com.chattymin.pebble.extractEmojis
+import com.chattymin.pebble.filterEmojis
 import com.chattymin.pebble.graphemeLength
 import com.chattymin.pebble.isEmoji
 import com.chattymin.textgrapheme.ui.theme.TextGraphemeTheme
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                         )
 
                         Text(
-                            text = "Length: ${text.graphemeLength}"
+                            text = "graphemeLength: ${text.graphemeLength}"
                         )
 
                         Text(
@@ -70,6 +71,10 @@ class MainActivity : ComponentActivity() {
 
                         Text(
                             text = "extractEmojis: ${text.extractEmojis()}",
+                        )
+
+                        Text(
+                            text = "filterEmojis: ${text.filterEmojis()}",
                         )
                     }
                 }
