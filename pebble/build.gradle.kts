@@ -45,7 +45,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
-val pebbleVersion = "0.0.1"
+val pebbleVersion = "0.1.0"
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
