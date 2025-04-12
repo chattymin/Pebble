@@ -60,7 +60,7 @@ Welcome **New Extensions**, **Performance Improvements**, and all ways of workin
 
 ## Contributors
 
-[![contributors](https://contrib.rocks/image?repo=chattymin/pebble)](https://github.com/chattymin/pebble/contributors)
+[![contributors](https://contrib.rocks/image?repo=chattymin/Pebble)](https://github.com/chattymin/pebble/contributors)
 </br>
 </br>
 
