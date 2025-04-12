@@ -54,6 +54,23 @@ fun String.containsEmoji(): Boolean {
 }
 
 /**
+ * Similar to [String.codePoints] which is available from API 24.
+ * This internal implementation is provided for compatibility with API 21+.
+ */
+private fun String.codePointsArray(): IntArray {
+    val codePoints = mutableListOf<Int>()
+
+    var i = 0
+    while (i < this.length) {
+        val codePoint = this.codePointAt(i)
+        codePoints.add(codePoint)
+        i += Character.charCount(codePoint)
+    }
+
+    return codePoints.toIntArray()
+}
+
+/**
  * Returns string list of emojis from the given text.
  */
 fun String.extractEmojis(): List<String> {
@@ -70,14 +87,7 @@ fun String.extractEmojis(): List<String> {
     while (end != BreakIterator.DONE) {
         val grapheme = this.substring(start, end)
 
-        val codePoints = mutableListOf<Int>()
-
-        var i = 0
-        while (i < grapheme.length) {
-            val codePoint = grapheme.codePointAt(i)
-            codePoints.add(codePoint)
-            i += Character.charCount(codePoint)
-        }
+        val codePoints = grapheme.codePointsArray()
 
         if (codePoints.any { isEmoji(it) }) {
             emojis.add(grapheme)
@@ -88,4 +98,34 @@ fun String.extractEmojis(): List<String> {
     }
 
     return emojis
+}
+
+/**
+ * Return a new string with all emojis removed.
+ */
+fun String.filterEmojis(): String {
+    if (this.isBlank()) return this
+
+    val iterator = localBreakIterator
+    iterator.setText(this)
+
+    val filtered = StringBuilder()
+
+    var start = iterator.first()
+    var end = iterator.next()
+
+    while (end != BreakIterator.DONE) {
+        val grapheme = this.substring(start, end)
+
+        val codePoints = grapheme.codePointsArray()
+
+        if (!codePoints.any { isEmoji(it) }) {
+            filtered.append(grapheme)
+        }
+
+        start = end
+        end = iterator.next()
+    }
+
+    return filtered.toString()
 }
