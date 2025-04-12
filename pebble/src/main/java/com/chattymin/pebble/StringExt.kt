@@ -42,9 +42,14 @@ fun String.isEmoji(): Boolean {
  * Returns `true` if this String contains any Emoji characters.
  */
 fun String.containsEmoji(): Boolean {
-    for (input in this) {
-        if (input.isEmoji()) return true
+    var i = 0
+
+    while (i < this.length) {
+        val codePoint = this.codePointAt(i)
+        if (isEmoji(codePoint)) return true
+        i += Character.charCount(codePoint)
     }
+
     return false
 }
 

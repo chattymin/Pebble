@@ -42,8 +42,11 @@ fun CharSequence.isEmoji(): Boolean {
  * Returns `true` if this CharSequence contains any Emoji characters.
  */
 fun CharSequence.containsEmoji(): Boolean {
-    for (input in this) {
-        if (input.isEmoji()) return true
+    var i = 0
+    while (i < this.length) {
+        val codePoint = Character.codePointAt(this, i)
+        if (isEmoji(codePoint)) return true
+        i += Character.charCount(codePoint)
     }
     return false
 }
