@@ -65,7 +65,15 @@ fun String.extractEmojis(): List<String> {
     while (end != BreakIterator.DONE) {
         val grapheme = this.substring(start, end)
 
-        val codePoints = grapheme.codePoints().toArray()
+        val codePoints = mutableListOf<Int>()
+
+        var i = 0
+        while (i < grapheme.length) {
+            val codePoint = grapheme.codePointAt(i)
+            codePoints.add(codePoint)
+            i += Character.charCount(codePoint)
+        }
+
         if (codePoints.any { isEmoji(it) }) {
             emojis.add(grapheme)
         }
