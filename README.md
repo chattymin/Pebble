@@ -1,6 +1,7 @@
 # Pebble [![GitHub License](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://opensource.org/licenses/Apache-2.0) [![MIN SDK](https://img.shields.io/badge/API-21%2B-orange.svg?style=flat)]([https://opensource.org/licenses/Apache-2.0](https://android-arsenal.com/api?level=21)) 
 
-Treat String Like A Pebble With Grapheme At Kotlin 🫧
+Treat String Like A Pebble With Grapheme At Kotlin 🫧   
+The Easy Way To Use Emoji 🚀
 </br>
 </br>
 
@@ -14,11 +15,20 @@ To address this inconvenience, Pebble Is Coming!
 </br>
 </br>
 
-## Gradle
-Add the dependency below to your **module**'s `build.gradle` file:
+## Gradle Settings
+Add the codes below to your **root** `build.gradle` file (not your module-level build.gradle file):
+```gradle
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+```   
+
+And, Add the dependency below to your **module** `build.gradle` file:
 ```kotlin
 dependencies {
-    implementation("io.github.chattymin:pebble:0.0.2")
+    implementation("io.github.chattymin:pebble:0.1.0")
 }
 ```
 </br>
@@ -29,7 +39,8 @@ dependencies {
 "🚀".graphemeLength == 1
 "🚀".isEmoji() == true
 "Hello Pebble 🚀 Welcome!".containsEmoji() == true
-"Hello🚀 This is Pebble 🫧 Welc🧑‍🧑‍🧒‍🧒ome".extractEmojis() == ["🚀", "🫧", "🧑‍🧑‍🧒‍🧒"]
+"Hello🚀 This is Pebble!🫧 Welc🧑‍🧑‍🧒‍🧒ome :)".extractEmojis() == ["🚀", "🫧", "🧑‍🧑‍🧒‍🧒"]
+"Hello🚀 This is Pebble!🫧 Welc🧑‍🧑‍🧒‍🧒ome :)".filterEmojis() == "Hello This is Pebble! Welcome :)"
 ```
 In addition to this, various types of extension functions are also available.   
 The goal is to cover all ranges officially provided by Kotlin.
@@ -42,10 +53,12 @@ You can explore and use various extension functions within the `Pebble` module :
 Contributions are always welcome!   
 Feel free to make an issue everything that you want to contribute!    
 Welcome **New Extensions**, **Performance Improvements**, and all ways of working with strings—**just like Pebble**!
+
+[CONTRIBUTING.md](https://github.com/chattymin/Pebble/blob/main/CONTRIBUTING.md)
 </br>
 </br>
 
-## 👨‍💻 Contributors
+## Contributors
 
 [![contributors](https://contrib.rocks/image?repo=chattymin/pebble)](https://github.com/chattymin/pebble/contributors)
 </br>
