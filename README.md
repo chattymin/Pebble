@@ -8,7 +8,7 @@ The Easy Way To Use Emoji 🚀
 ## Why Pebble?
 In Android, String is encoded in UTF-8, which means characters like emojis may not count as a single character.   
 ```kotlin
-"🚀".length() == 2
+"🚀".length == 2
 ```
 
 To address this inconvenience, Pebble Is Coming!
