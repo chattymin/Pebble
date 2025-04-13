@@ -9,7 +9,17 @@ The Easy Way To Use Emoji 🚀
 In Android, String is encoded in UTF-8, which means characters like emojis may not count as a single character.   
 ```kotlin
 "🚀".length == 2
+"🧑‍🧑‍🧒‍🧒".length == 11
 ```
+</br>
+
+Many applications display the character count when users enter text, such as nicknames or posts.   
+However, due to certain issues, emojis are not counted correctly.    
+AS-IS | TO-BE
+:--: | :--:
+<img width="428" alt="image" src="https://github.com/user-attachments/assets/06a38d04-202f-419f-b0e8-fdf821c5efdb" /> | <img width="428" alt="image" src="https://github.com/user-attachments/assets/f760e92d-d399-4326-88b6-c48ebe347ef7" />
+
+</br>
 
 To address this inconvenience, Pebble Is Coming!
 </br>
@@ -44,6 +54,7 @@ dependencies {
 ```
 In addition to this, various types of extension functions are also available.   
 The goal is to cover all ranges officially provided by Kotlin.
+
 
 You can explore and use various extension functions within the `Pebble` module :)
 </br>
