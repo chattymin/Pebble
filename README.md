@@ -77,7 +77,7 @@ Welcome **New Extensions**, **Performance Improvements**, and all ways of workin
 
 # License
 ```xml
-Copyright 2025 patrick (Dongmin Park)
+Copyright 2025 chattymin (Dongmin Park)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
