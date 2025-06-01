@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.vanniktech)
+    alias(libs.plugins.dokka)
 }
 
 android {
@@ -32,6 +33,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+}
+
+tasks.dokkaHtml.configure {
+    dokkaSourceSets {
+        named("main") {
+            noAndroidSdkLink.set(false)
+        }
     }
 }
 
