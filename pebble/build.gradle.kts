@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.chattymin.pebble"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21
@@ -44,17 +44,7 @@ tasks.dokkaHtml.configure {
     }
 }
 
-dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-}
-
-val pebbleVersion = "0.1.0"
+val pebbleVersion = "0.1.1"
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
