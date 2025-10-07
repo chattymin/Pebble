@@ -44,7 +44,7 @@ tasks.dokkaHtml.configure {
     }
 }
 
-val pebbleVersion = "0.1.0"
+val pebbleVersion = "0.1.1"
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
